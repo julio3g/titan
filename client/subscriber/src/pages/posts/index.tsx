@@ -3,8 +3,24 @@ import styles from './styles.module.scss';
 import { Title } from '../../components/Title';
 import Link from 'next/link';
 import Image from 'next/image';
+import { GetStaticProps } from 'next';
+import Prismic from '@prismicio/client';
+import { RichText } from 'prismic-dom';
+import { getPrismicClient } from '../../services/prismic';
 
-export default function Posts() {
+type Post = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  updatedAt: string;
+  thumbnail: string;
+};
+
+interface PostsProps {
+  posts: Post[];
+}
+
+export default function Posts({ posts }: PostsProps) {
   return (
     <>
       <Head>
@@ -19,7 +35,25 @@ export default function Posts() {
       <main className="container content">
         <Title title="Notícias" description="confira as últimas notícias" />
         <div className={styles.posts}>
-          <Link href={`/posts/test-test-tes`}>
+          {posts.map((post) => (
+            // eslint-disable-next-line react/jsx-key
+            <Link href={`/posts/${post.slug}`}>
+              <a key={post.slug}>
+                {/* <div>
+                  <Image
+                    src={post.thumbnail}
+                    alt={post.slug}
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div> */}
+                <time>{post.updatedAt}</time>
+                <strong>{post.title}</strong>
+                <p>{post.excerpt}</p>
+              </a>
+            </Link>
+          ))}
+          {/* <Link href={`/posts/test-test-tes`}>
             <a>
               <div>
                 <Image
@@ -114,9 +148,45 @@ export default function Posts() {
                 você Thiago Serafini, Andréia Maria Bernardt e equipe da Amoff
               </p>
             </a>
-          </Link>
+          </Link> */}
         </div>
       </main>
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const prismic = getPrismicClient();
+
+  const response = await prismic.query(
+    [Prismic.predicates.at('document.type', 'publication')],
+    {
+      fetch: ['publication.title', 'publication.content'],
+      pageSize: 100,
+    },
+  );
+
+  // buscando e formatando os posts (e melhor doque fazer todas as vezes)
+  const posts = response.results.map((post) => {
+    console.log(post);
+    return {
+      slug: post.uid,
+      title: RichText.asText(post.data.title),
+      thumbnail: post.data.thumbnail,
+      excerpt:
+        post.data.content.find((content: any) => content.type === 'paragraph')
+          ?.text ?? '',
+      updatedAt: new Date(post.last_publication_date).toLocaleString('pt-BR', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+      }),
+    };
+  });
+
+  return {
+    props: {
+      posts,
+    },
+  };
+};

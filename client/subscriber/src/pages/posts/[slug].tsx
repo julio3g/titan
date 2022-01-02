@@ -23,7 +23,6 @@ export default function Post({ post }: PostProps) {
       <main className={styles.container}>
         <article className={styles.post}>
           <h1>{post.title}</h1>
-          <time>{post.updatedAt}</time>
           <div
             className={styles.postContent}
             dangerouslySetInnerHTML={{ __html: post.content }}
@@ -47,6 +46,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     slug,
     title: RichText.asText(response.data.title),
     content: RichText.asHtml(response.data.content),
+
     updatedAt: new Date(response.last_publication_date).toLocaleString(
       'pt-BR',
       {
