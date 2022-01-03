@@ -65,12 +65,15 @@ a {
   text-decoration: none;
 }
 
-// ol,
-// ul {
-//   list-style: none;
-// }
-
 svg,
 img {
   display: block;
+}
+
+.block-img {
+  margin-top: 2rem;
+  & + p {
+    text-align: center;
+    margin: 0.5rem 0 1rem;
+  }
 }

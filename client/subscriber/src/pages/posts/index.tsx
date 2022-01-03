@@ -39,9 +39,8 @@ export default function Posts({ posts }: PostsProps) {
         <div className={styles.posts}>
           {posts.map((post) => (
             // eslint-disable-next-line react/jsx-key
-            <Link href={`/posts/${post.slug}`}>
+            <Link href={`/posts/${post.slug}`} passHref>
               <a key={post.slug}>
-                <img src={post.thumbnail.url} alt="alt" />
                 <div>
                   <Image
                     src={post.thumbnail.url}
@@ -86,6 +85,7 @@ export const getStaticProps: GetStaticProps = async () => {
       excerpt:
         post.data.content.find((content: any) => content.type === 'paragraph')
           ?.text ?? '',
+
       updatedAt: new Date(post.last_publication_date).toLocaleString('pt-BR', {
         day: '2-digit',
         month: 'short',

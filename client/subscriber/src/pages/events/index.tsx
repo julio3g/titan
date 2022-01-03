@@ -78,7 +78,7 @@ export default function Events() {
           {!events && (
             <div className={styles.noEvents}>
               <h1>Nenhum evento até o momento</h1>
-              <span>😔</span>
+              <span>😞</span>
             </div>
             // 😞
           )}
