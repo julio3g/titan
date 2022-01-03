@@ -1,6 +1,12 @@
-/** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
+};
+
+// next.config.js
+module.exports = {
+  images: {
+    domains: ['images.prismic.io'],
+  },
 };
 
 module.exports = {
@@ -13,8 +19,6 @@ module.exports = {
     return config;
   },
 };
-// const withImages = require('next-images');
-// module.exports = withImages();
 
 const path = require('path');
 const withImages = require('next-images');

@@ -13,7 +13,9 @@ type Post = {
   title: string;
   excerpt: string;
   updatedAt: string;
-  thumbnail: string;
+  thumbnail: {
+    url: string;
+  };
 };
 
 interface PostsProps {
@@ -39,116 +41,21 @@ export default function Posts({ posts }: PostsProps) {
             // eslint-disable-next-line react/jsx-key
             <Link href={`/posts/${post.slug}`}>
               <a key={post.slug}>
-                {/* <div>
+                <img src={post.thumbnail.url} alt="alt" />
+                <div>
                   <Image
-                    src={post.thumbnail}
+                    src={post.thumbnail.url}
                     alt={post.slug}
                     layout="fill"
                     objectFit="cover"
                   />
-                </div> */}
+                </div>
                 <time>{post.updatedAt}</time>
                 <strong>{post.title}</strong>
                 <p>{post.excerpt}</p>
               </a>
             </Link>
           ))}
-          {/* <Link href={`/posts/test-test-tes`}>
-            <a>
-              <div>
-                <Image
-                  src="/shared/Picture4-1.png"
-                  alt="image"
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-              <time>22 MAR, 2021</time>
-              <strong>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </strong>
-              <p>
-                Especial triplo parabéns para você Thiago Serafini, Andréia
-                Maria Bernardt e equipe da Amoff Especial triplo parabéns para
-                você Thiago Serafini, Andréia Maria Bernardt e equipe da Amoff
-                Especial triplo parabéns para você Thiago Serafini, Andréia
-                Maria Bernardt e equipe da Amoff Especial triplo parabéns para
-                você Thiago Serafini, Andréia Maria Bernardt e equipe da Amoff
-              </p>
-            </a>
-          </Link>
-          <Link href={`/posts/test-test-tes`}>
-            <a>
-              <div>
-                <Image
-                  src="/shared/Picture4-1.png"
-                  alt="image"
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-              <time>22 MAR, 2021</time>
-              <strong>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </strong>
-              <p>
-                Especial triplo parabéns para você Thiago Serafini, Andréia
-                Maria Bernardt e equipe da Amoff Especial triplo parabéns para
-                você Thiago Serafini, Andréia Maria Bernardt e equipe da Amoff
-                Especial triplo parabéns para você Thiago Serafini, Andréia
-                Maria Bernardt e equipe da Amoff Especial triplo parabéns para
-                você Thiago Serafini, Andréia Maria Bernardt e equipe da Amoff
-              </p>
-            </a>
-          </Link>
-          <Link href={`/posts/test-test-tes`}>
-            <a>
-              <div>
-                <Image
-                  src="/shared/Picture4-1.png"
-                  alt="image"
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-              <time>22 MAR, 2021</time>
-              <strong>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </strong>
-              <p>
-                Especial triplo parabéns para você Thiago Serafini, Andréia
-                Maria Bernardt e equipe da Amoff Especial triplo parabéns para
-                você Thiago Serafini, Andréia Maria Bernardt e equipe da Amoff
-                Especial triplo parabéns para você Thiago Serafini, Andréia
-                Maria Bernardt e equipe da Amoff Especial triplo parabéns para
-                você Thiago Serafini, Andréia Maria Bernardt e equipe da Amoff
-              </p>
-            </a>
-          </Link>
-          <Link href={`/posts/test-test-tes`}>
-            <a>
-              <div>
-                <Image
-                  src="/shared/Picture4-1.png"
-                  alt="image"
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-              <time>22 MAR, 2021</time>
-              <strong>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </strong>
-              <p>
-                Especial triplo parabéns para você Thiago Serafini, Andréia
-                Maria Bernardt e equipe da Amoff Especial triplo parabéns para
-                você Thiago Serafini, Andréia Maria Bernardt e equipe da Amoff
-                Especial triplo parabéns para você Thiago Serafini, Andréia
-                Maria Bernardt e equipe da Amoff Especial triplo parabéns para
-                você Thiago Serafini, Andréia Maria Bernardt e equipe da Amoff
-              </p>
-            </a>
-          </Link> */}
         </div>
       </main>
     </>
@@ -157,33 +64,35 @@ export default function Posts({ posts }: PostsProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const prismic = getPrismicClient();
-
   const response = await prismic.query(
     [Prismic.predicates.at('document.type', 'publication')],
     {
-      fetch: ['publication.title', 'publication.content'],
+      fetch: [
+        'publication.title',
+        'publication.thumbnail',
+        'publication.content',
+      ],
       pageSize: 100,
     },
   );
-
-  // buscando e formatando os posts (e melhor doque fazer todas as vezes)
+  // buscando e formatando os posts (é melhor do que fazer todas as vezes)
   const posts = response.results.map((post) => {
-    console.log(post);
     return {
       slug: post.uid,
       title: RichText.asText(post.data.title),
-      thumbnail: post.data.thumbnail,
+      thumbnail: {
+        url: post.data.thumbnail.url,
+      },
       excerpt:
         post.data.content.find((content: any) => content.type === 'paragraph')
           ?.text ?? '',
       updatedAt: new Date(post.last_publication_date).toLocaleString('pt-BR', {
         day: '2-digit',
-        month: 'long',
+        month: 'short',
         year: 'numeric',
       }),
     };
   });
-
   return {
     props: {
       posts,

@@ -83,13 +83,17 @@ export default function Contact() {
                 <label htmlFor="message" className={styles.label}>
                   Mensagem <span>*</span>
                 </label>
-                <textarea
-                  name="message"
-                  id="message"
-                  required
-                  className={styles.textarea}
-                  onChange={(e) => setMessage(e.target.value)}
-                />
+                <div>
+                  <div>
+                    <textarea
+                      name="message"
+                      id="message"
+                      required
+                      className={styles.textarea}
+                      onChange={(e) => setMessage(e.target.value)}
+                    />
+                  </div>
+                </div>
               </div>
 
               <button type="submit" className={styles.button}>
