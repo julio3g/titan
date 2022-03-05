@@ -8,8 +8,10 @@
     .wrapperTextarea {
       margin-bottom: 1rem;
       div {
+        width: 100%;
         display: flex;
         overflow: hidden;
+        border-radius: 0.75rem;
       }
       .label {
         display: block;
@@ -35,6 +37,7 @@
         }
       }
       .textarea {
+        resize: none;
         height: 10rem;
       }
     }

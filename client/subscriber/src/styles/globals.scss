@@ -70,10 +70,13 @@ img {
   display: block;
 }
 
-.block-img {
-  margin-top: 2rem;
-  & + p {
-    text-align: center;
-    margin: 0.5rem 0 1rem;
-  }
+.block-img + p:not(.block-img) {
+  text-align: center;
+  margin: 0.5rem 0 1.5rem;
+}
+.block-img + .block-img {
+  margin-top: 1.5rem;
+}
+p + .block-img {
+  margin-top: 1.5rem;
 }

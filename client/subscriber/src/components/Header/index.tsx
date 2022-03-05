@@ -9,13 +9,10 @@ import styles from './styles.module.scss';
 export function Header() {
   const mobile = useMedia('(max-width: 720px)');
   const [mobileMenu, setMobileMenu] = React.useState(false);
-
   const { pathname } = useRouter();
-
   React.useEffect(() => {
     setMobileMenu(false);
   }, [pathname]);
-
   return (
     <header className={styles.header}>
       <nav className={`${styles.nav} container`}>
@@ -61,16 +58,6 @@ export function Header() {
             <li>
               <ActiveLink activeClassName={styles.active} href="/supporters">
                 <a>Apoiadores</a>
-              </ActiveLink>
-            </li>
-            <li>
-              <ActiveLink activeClassName={styles.active} href="/events">
-                <a>Eventos</a>
-              </ActiveLink>
-            </li>
-            <li>
-              <ActiveLink activeClassName={styles.active} href="/contact">
-                <a>Contato</a>
               </ActiveLink>
             </li>
           </ul>

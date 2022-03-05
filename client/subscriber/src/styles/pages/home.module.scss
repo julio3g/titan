@@ -23,7 +23,6 @@
   padding: 0.75rem 1rem;
   border-radius: 0.75rem;
   background: var(--green);
-
   transition: all 0.2s ease 0s;
   justify-content: space-between;
   &:hover {
@@ -158,13 +157,11 @@
     }
   }
 }
-
 @media (max-width: 840px) {
   .supporters ul {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
 .events {
   padding-top: 4rem;
   padding-bottom: 6rem;

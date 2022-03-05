@@ -14,7 +14,6 @@
       li a {
         display: block;
         padding: 0.75rem;
-        font-weight: 500;
         transition: color 0.2s ease 0s;
         &:hover,
         &.active {
@@ -78,8 +77,6 @@
       left: 0;
       right: 0;
       bottom: 0;
-
-      // background: var(--white);
     }
     .navMobile {
       top: 5.75rem;
@@ -93,6 +90,17 @@
       background: var(--white);
       transform: translateY(-8px);
       transition: all 0.2s ease 0s;
+      &::after {
+        content: '';
+        position: absolute;
+        top: -8px;
+        right: 19px;
+        width: 0px;
+        height: 0px;
+        border-style: solid;
+        border-width: 0px 8px 8px;
+        border-color: transparent transparent var(--white);
+      }
       ul {
         flex-direction: column;
         gap: 0;

@@ -1,0 +1,23 @@
+.supporters {
+  padding-top: 4rem;
+
+  ul {
+    gap: 1rem;
+    display: grid;
+    list-style: none;
+    grid-template-columns: repeat(4, 1fr);
+    li {
+      height: 10rem;
+      position: relative;
+      img {
+        border-radius: 0.75rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 840px) {
+  .supporters ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

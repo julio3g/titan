@@ -1,30 +1,19 @@
 import Head from 'next/head';
 import { RichText } from 'prismic-dom';
-import Prismic from '@prismicio/client';
 import { GetServerSideProps } from 'next';
 import { getPrismicClient } from '../../services/prismic';
-
 import styles from './post.module.scss';
 import Image from 'next/image';
-
-interface ImagesSupporters {
-  content: string;
-}
-
 interface Post {
   slug: string;
   title: string;
   content: string;
   updatedAt: string;
 }
-
 interface PostProps {
   post: Post;
-  imagesSupporters: ImagesSupporters;
 }
-
-export default function Post({ post, imagesSupporters }: PostProps) {
-  console.log(imagesSupporters.content);
+export default function Post({ post }: PostProps) {
   return (
     <>
       <Head>
@@ -43,25 +32,417 @@ export default function Post({ post, imagesSupporters }: PostProps) {
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
             <div className={styles.supporters}>
-              <div>
-                <Image
-                  src="/shared/supporters/image-1.jpeg"
-                  alt="text"
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
+              <ul>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-1.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-2.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-3.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-4.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-5.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-6.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-7.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-8.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-9.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-10.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-11.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-12.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-13.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-14.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-15.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-16.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-17.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-18.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-19.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-20.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-21.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-22.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-23.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-24.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-25.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-26.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-27.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-28.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-29.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-30.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-31.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-32.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-33.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-34.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-35.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-36.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-37.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-38.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-39.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-40.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-41.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-42.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-43.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-44.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-45.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
+              </ul>
+              <script
+                async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+                crossOrigin="anonymous"
+              ></script>
+              {/* <!-- Anuncio patrocinadores (Museu Regional de Esportes) --> */}
+              <ins
+                className={styles.adsGoogle}
+                style={{
+                  display: 'block',
+                  marginTop: '1rem',
+                  borderRadius: '.75rem',
+                }}
+                data-ad-client="ca-pub-4334901886307766"
+                data-ad-slot="5637732032"
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+              ></ins>
+              <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+              <script
+                async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4334901886307766"
+                crossOrigin="anonymous"
+              ></script>
+              {/* <!-- Anuncio patrocinadores 2 (Museu Regional de Esportes) --> */}
+              <ins
+                className={styles.adsGoogle}
+                style={{
+                  display: 'block',
+                  marginTop: '1rem',
+                  borderRadius: '.75rem',
+                }}
+                data-ad-client="ca-pub-4334901886307766"
+                data-ad-slot="6481252831"
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+              ></ins>
+              <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
             </div>
-            {/* <div
-              dangerouslySetInnerHTML={{ __html: imagesSupporters.content }}
-            /> */}
           </div>
         </article>
       </main>
     </>
   );
 }
-
 export const getServerSideProps: GetServerSideProps = async ({
   req,
   params,
@@ -69,19 +450,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   const { slug }: any = params;
   const prismic = getPrismicClient(req);
   const response = await prismic.getByUID('publication', String(slug), {});
-  const getImagesSupporters = await prismic.query(
-    [Prismic.predicates.at('document.type', 'images-supporters')],
-    {
-      fetch: ['images-supporters.content'],
-      pageSize: 100,
-    },
-  );
-
-  const imagesSupporters = getImagesSupporters.results.map((image) => {
-    return {
-      content: RichText.asHtml(image.data.content),
-    };
-  });
   const post = {
     slug,
     title: RichText.asText(response.data.title),
@@ -95,10 +463,5 @@ export const getServerSideProps: GetServerSideProps = async ({
       },
     ),
   };
-  return {
-    props: {
-      post,
-      imagesSupporters,
-    },
-  };
+  return { props: { post } };
 };

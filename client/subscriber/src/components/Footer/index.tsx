@@ -55,20 +55,10 @@ export function Footer() {
                 <a>Apoiadores</a>
               </ActiveLink>
             </li>
-            <li>
-              <ActiveLink activeClassName={styles.active} href="/events">
-                <a>Eventos</a>
-              </ActiveLink>
-            </li>
-            <li>
-              <ActiveLink activeClassName={styles.active} href="/contact">
-                <a>Contato</a>
-              </ActiveLink>
-            </li>
           </ul>
         </nav>
       </div>
-      <nav className={styles.navCopy}>
+      <nav className={styles.nav}>
         <div className={`container ${styles.content}`}>
           <div className={styles.social}>
             <Link href="https://www.facebook.com/">
