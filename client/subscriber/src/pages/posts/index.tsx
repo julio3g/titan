@@ -7,6 +7,7 @@ import { RichText } from 'prismic-dom';
 import styles from './styles.module.scss';
 import { Title } from '../../components/Title';
 import { getPrismicClient } from '../../services/prismic';
+import { useState } from 'react';
 
 type Post = {
   slug: string;
@@ -21,6 +22,7 @@ interface PostsProps {
   posts: Post[];
 }
 export default function Posts({ posts }: PostsProps) {
+  // const [src, setSrc] = useState('https://i.imgur.com/gf3TZMr.jpeg');
   return (
     <>
       <Head>
@@ -40,6 +42,8 @@ export default function Posts({ posts }: PostsProps) {
                     alt={post.slug}
                     layout="fill"
                     objectFit="cover"
+                    // onError={() => setSrc('/assets/image-error.png')}
+                    // onError={src='/shared/supporters/image-1.jpg'}
                   />
                 </div>
                 <time>{post.publicationDate}</time>
@@ -75,7 +79,7 @@ export const getStaticProps: GetStaticProps = async () => {
       excerpt:
         post.data.content.find((content: any) => content.type === 'paragraph')
           ?.text ?? '',
-      publicationDate: new Date(post.first_publication_date).toLocaleString(
+      publicationDate: new Date(post.first_publication_date!).toLocaleString(
         'pt-BR',
         {
           day: '2-digit',

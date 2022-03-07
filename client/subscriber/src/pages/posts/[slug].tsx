@@ -8,7 +8,7 @@ interface Post {
   slug: string;
   title: string;
   content: string;
-  updatedAt: string;
+  createdAt: string;
 }
 interface PostProps {
   post: Post;
@@ -26,6 +26,7 @@ export default function Post({ post }: PostProps) {
       <main className="container content">
         <article className={styles.post}>
           <h1>{post.title}</h1>
+          <time>{post.createdAt}</time>
           <div>
             <div
               className={styles.content}
@@ -454,11 +455,13 @@ export const getServerSideProps: GetServerSideProps = async ({
     slug,
     title: RichText.asText(response.data.title),
     content: RichText.asHtml(response.data.content),
-    updatedAt: new Date(response.last_publication_date).toLocaleString(
+    createdAt: new Date(response.first_publication_date!).toLocaleString(
       'pt-BR',
       {
+        hour: 'numeric',
+        minute: 'numeric',
         day: '2-digit',
-        month: 'long',
+        month: 'short',
         year: 'numeric',
       },
     ),

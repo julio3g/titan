@@ -184,7 +184,6 @@ export const getStaticProps: GetStaticProps = async () => {
         'publication.thumbnail',
         'publication.content',
       ],
-      orderings: '[publication.first_publication_date desc]',
       pageSize: 3,
     },
   );
@@ -196,11 +195,14 @@ export const getStaticProps: GetStaticProps = async () => {
       excerpt:
         post.data.content.find((content: any) => content.type === 'paragraph')
           ?.text ?? '',
-      updatedAt: new Date(post.first_publication_date).toLocaleString('pt-BR', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-      }),
+      updatedAt: new Date(post.first_publication_date!).toLocaleString(
+        'pt-BR',
+        {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric',
+        },
+      ),
     };
   });
   return { props: { posts } };

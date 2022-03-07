@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Image from 'next/image';
 import { Title } from '../components/Title';
 import styles from '../styles/pages/supporters.module.scss';
@@ -5,6 +6,10 @@ import styles from '../styles/pages/supporters.module.scss';
 export default function Supporters() {
   return (
     <>
+      <Head>
+        <title>Apoiadores · Museu Regional de Esportes</title>
+        <meta name="title" content="Apoiadores · Museu Regional de Esportes" />
+      </Head>
       <main>
         <div className="container content">
           <Title title="Patrocinadores" />
