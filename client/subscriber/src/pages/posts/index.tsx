@@ -16,7 +16,7 @@ type Post = {
   thumbnail: {
     url: string;
   };
-  publicationDate: string;
+  createdAt: string;
 };
 interface PostsProps {
   posts: Post[];
@@ -34,8 +34,8 @@ export default function Posts({ posts }: PostsProps) {
         <div className={styles.posts}>
           {posts.map((post) => (
             // eslint-disable-next-line react/jsx-key
-            <Link href={`/posts/${post.slug}`}>
-              <a key={post.slug}>
+            <Link href={`/posts/${post.slug}`} key={post.slug}>
+              <a>
                 <div>
                   <Image
                     src={post.thumbnail.url}
@@ -46,7 +46,7 @@ export default function Posts({ posts }: PostsProps) {
                     // onError={src='/shared/supporters/image-1.jpg'}
                   />
                 </div>
-                <time>{post.publicationDate}</time>
+                <time>{post.createdAt}</time>
                 <strong>{post.title}</strong>
                 <p>{post.excerpt}</p>
               </a>
@@ -69,6 +69,7 @@ export const getStaticProps: GetStaticProps = async () => {
         'publication.content',
       ],
       pageSize: 100,
+      orderings: '[document.last_publication_date desc]',
     },
   );
   const posts = response.results.map((post) => {
@@ -79,7 +80,7 @@ export const getStaticProps: GetStaticProps = async () => {
       excerpt:
         post.data.content.find((content: any) => content.type === 'paragraph')
           ?.text ?? '',
-      publicationDate: new Date(post.first_publication_date!).toLocaleString(
+      createdAt: new Date(post.first_publication_date!).toLocaleString(
         'pt-BR',
         {
           day: '2-digit',

@@ -1,0 +1,50 @@
+.button {
+  height: 2rem;
+  width: 1.5rem;
+  margin-right: 1rem;
+  position: relative;
+  z-index: 100;
+  div {
+    position: relative;
+    width: 100%;
+    height: 3px;
+    background: var(--gray-500);
+    border-radius: 4px;
+    transition: all 0.2s ease 0s;
+  }
+  > div::after,
+  > div::before {
+    content: '';
+    left: 0;
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    transition: inherit;
+    border-radius: inherit;
+    transform-origin: 50% 50%;
+    background: var(--gray-500);
+  }
+  > div::before {
+    top: -6px;
+  }
+  > div::after {
+    top: 6px;
+  }
+}
+.active {
+  > div {
+    background: transparent;
+  }
+  > div::before,
+  > div::after {
+    background: var(--green);
+  }
+  > div::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+  > div::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+}

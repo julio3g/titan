@@ -1,18 +1,11 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { Nav } from '../Nav';
 import Logo from '../../assets/logo.svg';
-import useMedia from '../../Hooks/useMedia';
-import { ActiveLink } from '../ActiveLink';
 import styles from './styles.module.scss';
 
 export function Header() {
-  const mobile = useMedia('(max-width: 720px)');
-  const [mobileMenu, setMobileMenu] = React.useState(false);
-  const { pathname } = useRouter();
-  React.useEffect(() => {
-    setMobileMenu(false);
-  }, [pathname]);
   return (
     <header className={styles.header}>
       <nav className={`${styles.nav} container`}>
@@ -21,7 +14,7 @@ export function Header() {
             <Logo />
           </a>
         </Link>
-        {mobile && (
+        {/* {mobile && (
           <button
             type="button"
             aria-label="Menu"
@@ -61,7 +54,10 @@ export function Header() {
               </ActiveLink>
             </li>
           </ul>
-        </nav>
+        </nav> */}
+        <div className={styles.navContent}>
+          <Nav />
+        </div>
       </nav>
     </header>
   );

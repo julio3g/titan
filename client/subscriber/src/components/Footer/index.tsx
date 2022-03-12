@@ -1,11 +1,10 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './styles.module.scss';
+import { ActiveLink } from '../ActiveLink';
 import Facebook from '../../assets/facebook.svg';
 import IconButtonTop from '../../assets/top.svg';
 import Instagram from '../../assets/instagram.svg';
-import { ActiveLink } from '../ActiveLink';
-
 export function Footer() {
   function scrollToTop() {
     window.scrollTo({
@@ -37,7 +36,7 @@ export function Footer() {
             </Link>
           </p>
         </div>
-        <nav className={styles.nav}>
+        <nav className={styles.navContent}>
           <h3>Mapa do Site</h3>
           <ul>
             <li>

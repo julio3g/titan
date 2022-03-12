@@ -1,9 +1,9 @@
 import Head from 'next/head';
-import { RichText } from 'prismic-dom';
-import { GetServerSideProps } from 'next';
-import { getPrismicClient } from '../../services/prismic';
-import styles from './post.module.scss';
 import Image from 'next/image';
+import { RichText } from 'prismic-dom';
+import styles from '../post.module.scss';
+import { GetServerSideProps } from 'next';
+import { getPrismicClient } from '../../../services/prismic';
 interface Post {
   slug: string;
   title: string;

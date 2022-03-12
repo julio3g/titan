@@ -1,17 +1,17 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 import { GetStaticProps } from 'next';
-import Prismic from '@prismicio/client';
 import { RichText } from 'prismic-dom';
+import Prismic from '@prismicio/client';
+import useMedia from '../hooks/useMedia';
 import styles from '../styles/pages/home.module.scss';
 import { getPrismicClient } from '../services/prismic';
-
 type Post = {
   slug: string;
   title: string;
   excerpt: string;
-  updatedAt: string;
+  createdAt: string;
   thumbnail: {
     url: string;
   };
@@ -20,7 +20,7 @@ interface PostsProps {
   posts: Post[];
 }
 export default function Home({ posts }: PostsProps) {
-  const events = false;
+  const mobile = useMedia('(max-width: 768px)');
   return (
     <>
       <Head>
@@ -40,12 +40,17 @@ export default function Home({ posts }: PostsProps) {
             <h1>A Memória Viva do Esporte Amador de Fraiburgo e Região</h1>
             <button
               className={styles.button}
-              onClick={() =>
-                window.scroll({
-                  top: 750,
-                  behavior: 'smooth',
-                })
-              }
+              onClick={() => {
+                mobile
+                  ? window.scroll({
+                      top: 1020,
+                      behavior: 'smooth',
+                    })
+                  : window.scroll({
+                      top: 800,
+                      behavior: 'smooth',
+                    });
+              }}
             >
               <span>Confira as notícias</span>
               <Image
@@ -63,7 +68,7 @@ export default function Home({ posts }: PostsProps) {
             height={483}
           />
         </section>
-        <section className={`${styles.sectionPost} container`}>
+        <section className={`${styles.post} container`}>
           <h2>Últimas notícias</h2>
           <div className={styles.posts}>
             {posts.map((post) => (
@@ -71,7 +76,7 @@ export default function Home({ posts }: PostsProps) {
               <div key={post.slug}>
                 <Link href={`/posts/${post.slug}`}>
                   <a>
-                    <time>{post.updatedAt}</time>
+                    <time>{post.createdAt}</time>
                     <strong>{post.title}</strong>
                     <div>
                       <Image
@@ -168,12 +173,10 @@ export default function Home({ posts }: PostsProps) {
             </li>
           </ul>
         </section>
-        {!events && <div className={styles.spaceNoEvents} />}
       </main>
     </>
   );
 }
-
 export const getStaticProps: GetStaticProps = async () => {
   const prismic = getPrismicClient();
   const response = await prismic.query(
@@ -185,6 +188,7 @@ export const getStaticProps: GetStaticProps = async () => {
         'publication.content',
       ],
       pageSize: 3,
+      orderings: '[document.last_publication_date desc]',
     },
   );
   const posts = response.results.map((post) => {
@@ -195,7 +199,7 @@ export const getStaticProps: GetStaticProps = async () => {
       excerpt:
         post.data.content.find((content: any) => content.type === 'paragraph')
           ?.text ?? '',
-      updatedAt: new Date(post.first_publication_date!).toLocaleString(
+      createdAt: new Date(post.first_publication_date!).toLocaleString(
         'pt-BR',
         {
           day: '2-digit',

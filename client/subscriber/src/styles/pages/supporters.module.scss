@@ -1,6 +1,5 @@
 .supporters {
   padding-top: 4rem;
-
   ul {
     gap: 1rem;
     display: grid;
@@ -15,7 +14,6 @@
     }
   }
 }
-
 @media (max-width: 840px) {
   .supporters ul {
     grid-template-columns: repeat(2, 1fr);
