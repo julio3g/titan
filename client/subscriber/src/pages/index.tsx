@@ -73,7 +73,7 @@ export default function Home({ posts }: PostsProps) {
           <div className={styles.posts}>
             {posts.map((post) => (
               // eslint-disable-next-line react/jsx-key
-              <div key={post.slug}>
+              <div className={styles.container} key={post.slug}>
                 <Link href={`/posts/${post.slug}`}>
                   <a>
                     <time>{post.createdAt}</time>
