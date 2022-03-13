@@ -1,10 +1,10 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import { GetStaticProps } from 'next';
 import { RichText } from 'prismic-dom';
 import Prismic from '@prismicio/client';
 import useMedia from '../hooks/useMedia';
+import { GetStaticProps } from 'next';
 import styles from '../styles/pages/home.module.scss';
 import { getPrismicClient } from '../services/prismic';
 type Post = {
@@ -209,5 +209,6 @@ export const getStaticProps: GetStaticProps = async () => {
       ),
     };
   });
-  return { props: { posts } };
+  // revalidate: 60 * 60 (one hour), // In seconds
+  return { props: { posts }, revalidate: 60 * 60 };
 };
