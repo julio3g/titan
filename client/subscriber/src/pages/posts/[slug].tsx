@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { RichText } from 'prismic-dom';
 import { GetServerSideProps } from 'next';
+import Prismic from '@prismicio/client';
 import { getPrismicClient } from '../../services/prismic';
 import styles from './post.module.scss';
 import Image from 'next/image';
@@ -451,6 +452,13 @@ export const getServerSideProps: GetServerSideProps = async ({
   const { slug }: any = params;
   const prismic = getPrismicClient(req);
   const response = await prismic.getByUID('publication', String(slug), {});
+  const imagesSupporters = await prismic.query(
+    [Prismic.predicates.at('document.type', 'images-supporters')],
+    {
+      fetch: ['publication.images'],
+      orderings: '[document.last_publication_date desc]',
+    },
+  );
   const post = {
     slug,
     title: RichText.asText(response.data.title),
@@ -465,5 +473,12 @@ export const getServerSideProps: GetServerSideProps = async ({
       },
     ),
   };
+  const imagesSupporter = imagesSupporters.results.map((image) => {
+    console.log(image.data.images);
+    return {
+      urlImage: { url: image.data.images },
+    };
+  });
+  console.log(imagesSupporter);
   return { props: { post } };
 };
