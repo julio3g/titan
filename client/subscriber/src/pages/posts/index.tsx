@@ -31,7 +31,7 @@ export default function Posts({ posts }: PostsProps) {
       </Head>
       <main className="container content">
         <Title title="Notícias" description="confira as últimas notícias" />
-        <div className={styles.posts}>
+        <article className={styles.posts}>
           {posts.map((post) => (
             // eslint-disable-next-line react/jsx-key
             <Link href={`/posts/${post.slug}`} key={post.slug}>
@@ -52,7 +52,7 @@ export default function Posts({ posts }: PostsProps) {
               </a>
             </Link>
           ))}
-        </div>
+        </article>
       </main>
     </>
   );
