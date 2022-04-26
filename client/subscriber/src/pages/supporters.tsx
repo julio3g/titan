@@ -129,7 +129,7 @@ export default function Supporters() {
               </li>
               <li>
                 <Image
-                  src="/shared/supporters/image-15.jpg"
+                  src="/shared/supporters/image-15.png"
                   alt="image"
                   layout="fill"
                   objectFit="cover"
