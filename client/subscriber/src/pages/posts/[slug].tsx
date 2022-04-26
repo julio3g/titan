@@ -146,6 +146,14 @@ export default function Post({ post }: PostProps) {
                     objectFit="cover"
                   />
                 </li>
+                <li>
+                  <Image
+                    src="/shared/supporters/image-15.jpg"
+                    alt="image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </li>
               </ul>
             </div>
           </div>
